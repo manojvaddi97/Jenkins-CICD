@@ -4,6 +4,7 @@ pipeline {
     stage('Checkout') {
       steps {
         sh 'echo passed'
+        sh 'whoami'
         //git branch: 'main', url: 'https://github.com/manojvaddi97/Jenkins-CICD.git'
       }
     }
