@@ -51,6 +51,8 @@ pipeline {
                 sh '''
                     git config user.email "manojvaddi497@gmail.com"
                     git config user.name "Manoj Vaddi"
+                    git add java-maven-sonar-argocd-helm-k8s/spring-boot-app/JenkinsFile
+                    git commit -m "update jenkins file"
                     BUILD_NUMBER=${BUILD_NUMBER}
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
                     git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
