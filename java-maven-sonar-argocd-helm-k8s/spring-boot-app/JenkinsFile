@@ -1,6 +1,7 @@
 pipeline {
     agent { 
         docker {
+            sh 'whoami'
             image 'manojvaddi497/dock_images:maven-docker-agent'
             args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
             }
@@ -8,6 +9,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'whoami'
                 sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn -B -DskipTests clean package'
             }
         }
@@ -22,6 +24,7 @@ pipeline {
           }
             steps {
               withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+                sh 'whoami'
                 sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
               }
             }
