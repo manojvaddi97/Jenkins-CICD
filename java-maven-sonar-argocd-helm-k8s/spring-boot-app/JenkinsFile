@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn test'
             }
             post {
               always {
