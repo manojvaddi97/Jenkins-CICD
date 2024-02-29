@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Static Code Analysis') {
           environment {
-            SONAR_URL = ""
+            SONAR_URL = "http://3.96.54.33:9000"
           }
             steps {
               withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
@@ -50,7 +50,7 @@ pipeline {
 
         stage('Update Deployment File') {
         environment {
-            GIT_REPO_NAME = ""
+            GIT_REPO_NAME = "Jenkins-CICD"
             GIT_USER_NAME = "manojvaddi97"
         }
         steps {
