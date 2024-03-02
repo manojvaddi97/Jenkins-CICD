@@ -51,13 +51,13 @@ pipeline {
         environment {
             GIT_REPO_NAME = "Jenkins-CICD"
             GIT_USER_NAME = "manojvaddi97"
-            GIT_DIRECTORY = "/var/lib/jenkins/workspace/ultimate_CICD"
+            // GIT_DIRECTORY = "/var/lib/jenkins/workspace/ultimate_CICD"
         }
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-              dir(GIT_DIRECTORY) { // Change the working directory to the Git repository directory
+              //dir(GIT_DIRECTORY) { // Change the working directory to the Git repository directory
                 sh '''
-                    git config --global --add safe.directory /var/lib/jenkins/workspace/ultimate_CICD
+                    pwd
                     git config user.email "manojvaddi497@gmail.com"
                     git config user.name "Manoj Vaddi"
                     BUILD_NUMBER=${BUILD_NUMBER}
@@ -71,5 +71,5 @@ pipeline {
      }
    }
  }
-}
+//}
 
