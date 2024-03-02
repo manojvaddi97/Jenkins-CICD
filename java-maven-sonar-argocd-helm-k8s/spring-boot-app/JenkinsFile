@@ -51,6 +51,7 @@ pipeline {
         environment {
             GIT_REPO_NAME = "Jenkins-CICD"
             GIT_USER_NAME = "manojvaddi97"
+            GIT_DIRECTORY = "/var/lib/jenkins/workspace/ultimate_CICD"
         }
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
