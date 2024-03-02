@@ -15,9 +15,12 @@ pipeline {
             }
         }
         stage('Static Code Analysis') {
-            agent any
+            agent {
+                docker {
             environment {
                 SONAR_URL = "http://35.182.246.116:9000"
+            }
+                }
             }
             steps {
                 withCredentials([string(credentialsId: 'sonarqube-api', variable: 'SONAR_AUTH_TOKEN')]) {
