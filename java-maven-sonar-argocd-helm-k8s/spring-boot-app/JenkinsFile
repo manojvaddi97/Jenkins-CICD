@@ -17,14 +17,13 @@ pipeline {
         stage('Static Code Analysis') {
             agent {
                 docker {
-            environment {
-                SONAR_URL = "http://35.182.246.116:9000"
-            }
+                    image 'manojvaddi497/dock_images:maven-docker-agent'
+                    args '--user root'
                 }
             }
             steps {
                 withCredentials([string(credentialsId: 'sonarqube-api', variable: 'SONAR_AUTH_TOKEN')]) {
-                    sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+                    sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=http://35.182.246.116:9000'
                 }
             }
         }
@@ -46,7 +45,7 @@ pipeline {
         }
         stage('Update Deployment File') {
             agent {
-                label '!docker' // Run this stage on agents that are not docker
+                label '!docker' // Run this stage on agents that are not Docker
             }
             environment {
                 GIT_REPO_NAME = "Jenkins-CICD"
