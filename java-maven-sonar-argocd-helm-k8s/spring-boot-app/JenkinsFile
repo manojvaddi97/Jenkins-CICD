@@ -1,7 +1,7 @@
 pipeline {
     agent { 
         docker {
-            image 'manojvaddi497/dock_images:maven-docker-git-agent'
+            image 'abhishekf5/maven-abhishek-docker-agent:v1'
             args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
             }
       }
@@ -57,9 +57,6 @@ pipeline {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
               //dir(GIT_DIRECTORY) { // Change the working directory to the Git repository directory
                 sh '''
-                    pwd
-                    whoami
-                    ls -a
                     git config user.email "manojvaddi497@gmail.com"
                     git config user.name "Manoj Vaddi"
                     BUILD_NUMBER=${BUILD_NUMBER}
