@@ -55,7 +55,6 @@ pipeline {
                 withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                     sh '''
                         pwd
-                        // cd Jenkins-CICD // Change to the cloned repository directory
                         git config user.email "manojvaddi497gmail.com"
                         git config user.name "Manoj Vaddi"
                         BUILD_NUMBER=${BUILD_NUMBER}
