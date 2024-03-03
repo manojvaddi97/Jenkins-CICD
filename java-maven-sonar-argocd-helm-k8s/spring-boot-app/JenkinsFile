@@ -54,6 +54,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                     sh '''
+                        cd '/var/lib/jenkins/workspace/ultimate_CICD'
                         pwd
                         ls -a
                         git config user.email "manojvaddi497gmail.com"
