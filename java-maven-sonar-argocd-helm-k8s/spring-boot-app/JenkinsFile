@@ -54,7 +54,7 @@ pipeline {
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
-                    dir('/var/lib/jenkins/workspace/ultimate_CICD')
+                    dir('/var/lib/jenkins/workspace/ultimate_CICD') {
                        git branch: 'main' url:'https://github.com/manojvaddi97/Jenkins-CICD.git'
                        git config user.email "manojvaddi497gmail.com"
                        git config user.name "Manoj Vaddi"
@@ -63,6 +63,7 @@ pipeline {
                        git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
                        git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                  }
                 '''
             }
         }
