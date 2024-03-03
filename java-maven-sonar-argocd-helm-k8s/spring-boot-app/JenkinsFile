@@ -55,7 +55,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                     sh '''
                         whoami
-                        su - jenkins -c "cd '/var/lib/jenkins/workspace/ultimate_CICD' && \
+                        sudo -u jenkins sh -c 'cd '"'"'/var/lib/jenkins/workspace/ultimate_CICD'"'"' && \
                         pwd && \
                         ls -a && \
                         whoami && \
@@ -65,7 +65,7 @@ pipeline {
                         sed -i 's/replaceImageTag/\${BUILD_NUMBER}/g' java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml && \
                         git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml && \
                         git commit -m 'Update deployment image to version \${BUILD_NUMBER}' && \
-                        git push https://\${GITHUB_TOKEN}@github.com/\${GIT_USER_NAME}/\${GIT_REPO_NAME} HEAD:main"
+                        git push https://\${GITHUB_TOKEN}@github.com/\${GIT_USER_NAME}/\${GIT_REPO_NAME} HEAD:main'
                     '''
                 }
             }
