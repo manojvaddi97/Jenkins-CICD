@@ -2,20 +2,20 @@ pipeline {
     agent {
         docker {
             image 'manojvaddi497/django:maven-docker-agentv2'
-            args '--user root -v /var/run/docker.sock:/var/run/docker.sock --entrypoint=""' // mount Docker socket to access the host's Docker daemon
+            args '--user root -v /var/run/docker.sock:/var/run/docker.sock --entrypoint=""' // Mount Docker socket to access the host's Docker daemon
         }
     }
     stages {
         stage('Checkout') {
             steps {
-                sh 'echo passed'
-                //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
+                // Use the 'checkout' step to clone the repository
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/manojvaddi97/Jenkins-CICD.git']]])
             }
         }
         stage('Build and Test') {
             steps {
                 sh 'ls -ltr'
-                // build the project and create a JAR file
+                // Build the project and create a JAR file
                 sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
                 sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn test'
             }
@@ -54,8 +54,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                     sh '''
-                        cd /var/lib/jenkins/workspace/ultimate_CICD
-                        git branch: 'main', url: 'https://github.com/manojvaddi97/Jenkins-CICD.git'
+                        cd Jenkins-CICD // Change to the cloned repository directory
                         git config user.email "manojvaddi497gmail.com"
                         git config user.name "Manoj Vaddi"
                         BUILD_NUMBER=${BUILD_NUMBER}
