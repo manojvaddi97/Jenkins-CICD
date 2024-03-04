@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: manojvaddi497/dock_images:18
+        image: manojvaddi497/dock_images:119
         ports:
-        - containerPort: 180180
+        - containerPort: 11901190
