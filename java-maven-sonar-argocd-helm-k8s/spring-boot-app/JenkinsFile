@@ -60,7 +60,7 @@ pipeline {
                 cat java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
                 
                 # Perform the replacement using sed command
-                sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
+                sed -i "s/8/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
                 
                 # Print out the content of deployment.yml after the sed command
                 echo "Content of deployment.yml after replacement:"
