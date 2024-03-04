@@ -54,20 +54,9 @@ pipeline {
                     git config user.email "manojvaddi497@gmail.com"
                 git config user.name "Manoj Vaddi"
                 BUILD_NUMBER=${BUILD_NUMBER}
-                
-                # Print out the content of deployment.yml before the sed command
-                echo "Content of deployment.yml before replacement:"
-                cat java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
-                
                 # Perform the replacement using sed command
-                sed -i "s/8/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
-                
-                # Print out the content of deployment.yml after the sed command
-                echo "Content of deployment.yml after replacement:"
-                cat java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
-                
+                sed -i "s/8/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml           
                 git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
-                git add java-maven-sonar-argocd-helm-k8s/spring-boot-app/target/
                 git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                 git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
             '''
